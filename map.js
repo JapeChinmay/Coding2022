@@ -82,3 +82,31 @@ const capital = function (name) {
 };
 
 capital("chinmay jape");
+
+const currencies = new Map([
+  ["usd", "united staes of america"],
+  ["ruppe", "india"],
+  ["pound", "united kingdom"],
+]);
+
+let arr = ["a", "as", "ggd", "ass"];
+
+// console.log(arr.slice0(0, -2));
+console.log(arr.unshift(-1));
+console.log(arr);
+
+console.log([...arr]);
+
+// splice
+
+console.log(arr.splice(1, 4));
+
+console.log(arr);
+
+// console.log(currencies.keys(), currencies.values());
+// // console.log(currencies.values.);
+// console.log(
+//   currencies.forEach((el) => {
+//     const al = el.toUpperCase();
+//   })
+// );
