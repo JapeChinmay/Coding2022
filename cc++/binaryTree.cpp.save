@@ -1,0 +1,189 @@
+#include<iostream>
+#include<queue>
+
+using namespace std;
+
+template<typename T>
+class BinaryTree {
+
+public:
+
+
+    T data;
+    BinaryTree* left;
+    BinaryTree* right;
+
+
+    BinaryTree(T data) {
+        this->data=data;
+           left = NULL;
+           right = NULL;
+
+      }
+
+      ~BinaryTree() {
+
+          delete left;
+          delete right;
+
+
+         }
+  };
+
+
+  void printTreeb(BinaryTree<int>* root) {
+
+          if(root == NULL) return;
+          cout << root->data << ": ";
+          if(root->left != NULL){
+
+               cout <<" LEFT : " <<  " " << root->left->data << " ";
+
+          }
+
+          if(root->right != NULL) {
+
+            cout << "RIGHT :" << " " << root->right->data << " ";
+          }
+
+          cout << endl;
+
+
+
+          printTreeb(root->left);
+
+
+          printTreeb(root->right);
+
+    }
+
+
+
+    BinaryTree<int>* takeInput() {
+
+         int rootData;
+         cout << "Enter root data" << endl;
+         cin >> rootData;
+
+         if(rootData == -1)  {
+
+                return NULL;
+
+         }
+
+
+         else {
+
+
+         BinaryTree<int>* root = new BinaryTree<int>(rootData);
+
+         BinaryTree<int>* leftC  =  takeInput();
+         BinaryTree<int>* rightC = takeInput();
+         root->left = leftC;
+         root->right=  rightC;
+         return root;
+         }
+
+
+       }
+
+       ///////////////////////////////////////////////
+
+       BinaryTree<int>* takeInputL() {
+            int rootData;
+            cout << "Enter root data" << endl;
+            cin >> rootData;
+
+            if(rootData == -1) {
+                 return NULL;
+
+            }
+
+            BinaryTree<int>* root = new BinaryTree<int>(rootData);
+            queue<BinaryTree<int>*> pendingNodes;
+            pendingNodes.push(root);
+            while(pendingNodes.size()!= 0) {
+
+                  BinaryTree<int>* front = pendingNodes.front();
+                  pendingNodes.pop();
+
+
+                  cout << " ENTER LEFT CHILD FOR" << " " << front->data << endl;
+                  int leftChildData;
+                  cin >> leftChildData;
+                  if(leftChildData != -1) {
+                        BinaryTree<int>* child = new BinaryTree<int>(leftChildData);
+                        front->left = child;
+                        pendingNodes.push(child);
+
+
+                  }
+
+                cout << " ENTER RIGHT CHILD FOR" << " " << front->data << endl;
+                  int RightChildData;
+                  cin >> RightChildData;
+
+                  if(RightChildData != -1) {
+                        BinaryTree<int>* child = new BinaryTree<int>(RightChildData);
+                        front->right= child;
+                        pendingNodes.push(child);
+
+
+                  }
+
+            }
+
+            return root;
+
+
+       }
+
+
+       int Nodes(BinaryTree<int>* root) {
+           if(root == NULL) return 0;
+
+
+             int ans = 1;
+
+             return ans + Nodes(root->left) + Nodes(root->right);
+       }
+       
+       
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  
+
+
+
+
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main() {
+    BinaryTree<int>* root = takeInputL();
+
+
+
+
+    printTreeb(root);
+    cout << Nodes(root);
+
+
+
+
+
+
+ }
