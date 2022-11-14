@@ -121,7 +121,9 @@ void insert(string key, V value) {
     Map<V>* node = new Map<V>(key , value);
     node->next = head;
     buckets[bucketIndex] = node;
-    
+    count++;
+
+
 
 
 
@@ -132,10 +134,63 @@ void insert(string key, V value) {
 
 V getValue(string key) {
 
+    int buckerIndex = getBucketIndex(string key);
+    Map<V>* head = buckets[buckerIndex];
+    while(head != NULL) {
+          if(head->key == key) {
+
+            return head->value;
+
+
+          }
+
+          head = head->next;
+
+    }
+
+    return 0;
+    
+
 }
 
 
 V remove(string key) {
+
+    int bucketIndex = getBucketIndex(string key);
+    Map<V>* head=  buckets[bucketIndex];
+
+    Map<V>* prev = NULL;
+    while(head != NULL) {
+          if(head->key == key) {
+            if(prev == NULL) {
+                  buckets[bucketIndex] = head->next;
+            }else {
+                  prev->next= head->next;
+            }
+
+            V value1 = head->value;
+
+
+            head->next=  NULL;
+            delete head;
+            count--;
+
+            return value1;
+
+
+
+                
+          }
+
+          prev=  head;
+          head=  head->next;
+
+
+    }
+
+
+    return 0;
+
 
 }
 };
