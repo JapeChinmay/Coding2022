@@ -14,7 +14,21 @@ class Node {
 
       }
 
+      ~Node() {
+           int v = this->data;
+
+           if(this->next != NULL) {
+                 delete next;
+                 this->next=  NULL;
+
+           }
+
+           cout << "Memory is free" << endl;
+      }
+
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void insert(Node* &head, int data) {
     Node* temp  =new Node(data);
@@ -71,15 +85,55 @@ void insertAtPos(int pos, int data , Node* &head, Node* &tail) {
         start->next = temp;
 
 
-
-
-
-        
-
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+  void deleteNode(int pos , Node* &head, Node* &tail) {
+       
+           if(pos  == 1) {
+               
+                 Node* temp = head;
+                 head= head->next;
+                 temp->next = NULL;
 
+
+                 delete temp;
+
+
+           } 
+           else  {
+              Node* prev = NULL;
+              Node* curr=  head;
+              int c= 1;
+              while(c <pos) {
+
+                
+
+                prev = curr;
+                curr = curr->next;
+                c++;
+
+
+                    
+              }if(curr->next == NULL) {
+                    tail = prev;
+                    prev->next = NULL;
+                    
+
+
+              }
+              
+
+             
+
+              prev->next=  curr->next;
+              curr->next = NULL;
+
+              delete curr;
+
+           }
+  }
 
 int main() {
 
@@ -90,10 +144,19 @@ int main() {
    insertAttail(tail, 1212);
    insertAttail(tail,10);
    insertAtPos(4,56,head, tail);
-   
+
    insertAtPos(3,33,head, tail);
 
    printLL(head);
+
+   deleteNode(3, head, tail);
+   deleteNode(1,head, tail);
+   deleteNode(3, head, tail);
+
+
+   printLL(head);
+
+
 
    cout << head->data << tail->data << endl;
 
