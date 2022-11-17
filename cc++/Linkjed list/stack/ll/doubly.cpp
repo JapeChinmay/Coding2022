@@ -15,6 +15,18 @@ class Doubly {
           this->next = NULL;
 
        }
+
+       ~Doubly() {
+            int val = this->data;
+            if(next!=NULL) {
+                  delete next;
+                  next = NULL;
+                  
+            }
+
+            cout << "deleted"<< endl;
+
+       }
 };
 
 
@@ -54,6 +66,82 @@ void insetAtTail(Doubly* &tail, int data) {
 
 }
 
+void insertAtPos(Doubly* &head, Doubly*&tail ,int data, int pos)  {
+       if(pos == 1) {
+             insertAtHead(head, data);
+             return;
+
+       }
+
+       Doubly* temp = head;
+
+
+       int c= 1;
+       while(c < pos-1) {
+            
+            temp = temp->next;
+            c++;
+
+            
+       }
+
+       if(temp->next == NULL) {
+            insetAtTail(tail, data);
+            return;
+
+       }
+
+       Doubly*nodetoInsert = new Doubly(data);
+       nodetoInsert->next = temp->next;
+       temp->next->prev = nodetoInsert;
+       temp->next = nodetoInsert;
+       nodetoInsert->prev = temp;
+
+}
+
+void deleteAtPos(Doubly* &head, int pos) {
+      
+          if(pos == 1) {
+            Doubly* temp = head;
+            temp->next->prev = NULL;
+            head = temp->next;
+            temp->next = NULL;
+            delete temp;
+
+                  
+          } else {
+               
+               Doubly* curr = head;
+               Doubly* prev = NULL;
+
+
+               int c=1;
+               while(c < pos) {
+                     prev =curr;
+                     curr = curr->next;
+                     c++;
+               }
+
+              
+
+
+               
+
+
+               curr->prev = NULL;
+               prev->next = curr->next;
+               curr->next = NULL;
+               delete curr;
+
+               
+
+               
+
+
+          }
+}
+
+
 
 
 int main() {
@@ -68,6 +156,15 @@ int main() {
     insertAtHead(head,3);
     insetAtTail(tail, 999);
     insertAtHead(head,1000);
+    insertAtPos(head, tail, 111,4);
+    deleteAtPos(head, 2);
+    
+
+    
+
+ 
+
+
 
 
 
