@@ -135,6 +135,80 @@ void insertAtPos(int pos, int data , Node* &head, Node* &tail) {
            }
   }
 
+  /////////////////////////////////////////////////////////////////////////////////////////
+
+
+  Node*  reverseLL(Node* &head) {
+        Node* curr = head;
+        
+        Node* prev = NULL;
+
+        while(curr != NULL) {
+
+            Node* foraward = curr->next;
+            curr->next=  prev;
+            prev = curr;
+            curr = foraward;
+
+               
+        };
+
+        return prev;
+
+
+        
+
+      
+  }
+
+  int middle(Node* head) {
+
+        if(head == NULL ) return 0;
+        if(head->next == NULL) return head->data;
+
+         Node* fast = head->next;
+         Node* slow = head;
+
+         while(fast != NULL) {
+               fast = fast->next;
+               if(fast != NULL) {
+                    fast = fast->next;
+
+               }
+
+               slow = slow->next;
+               cout << "Stepped" << endl;
+
+
+         }
+
+         return slow->data;
+
+
+  }
+
+  void reverseLLRecursive(Node* &head, Node* curr, Node* prev) {
+
+        
+          if(curr  == NULL) {
+              head=  prev;
+              return;
+
+
+
+
+
+          }
+
+          Node* ford = curr->next;
+          reverseLLRecursive(head, ford, curr);
+          curr->next= prev;
+
+  };
+
+  
+
+
 int main() {
 
     Node* node1 = new Node(12);
@@ -143,18 +217,41 @@ int main() {
 
    insertAttail(tail, 1212);
    insertAttail(tail,10);
+   insertAttail(tail,111);
+   insertAttail(tail,4567);
+   insertAttail(tail,3232);
    insertAtPos(4,56,head, tail);
 
    insertAtPos(3,33,head, tail);
 
    printLL(head);
 
-   deleteNode(3, head, tail);
-   deleteNode(1,head, tail);
-   deleteNode(3, head, tail);
+//    deleteNode(3, head, tail);
+//    deleteNode(1,head, tail);
+//    deleteNode(3, head, tail);
+
+   //Node* newHead =  reverseLL(head);
+
+//    Node* curr = head;
+//    Node * prev = NULL;
 
 
-   printLL(head);
+//    reverseLLRecursive(head, curr, prev);
+
+int ans = middle(head);
+
+cout << ans << endl;
+
+   
+   //printLL(head);
+
+   
+   
+
+
+
+
+  
 
 
 
