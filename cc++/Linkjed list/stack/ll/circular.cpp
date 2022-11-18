@@ -1,4 +1,5 @@
 #include<iostream>
+#include<map>
 using namespace std;
 
 
@@ -113,6 +114,29 @@ void print(Node* &tail) {
 
 }
 
+bool isdetected(Node* &tail)  {
+        
+        if(tail== NULL) return false;
+
+         map<Node* , bool> visited;
+
+
+         Node* temp = tail;
+         while(temp !=NULL) {
+              if(visited[temp] == true) {
+                     return 1;
+
+              }
+
+              visited[temp] == true;
+              temp = temp->next;
+
+         }
+
+         return 0;
+
+  }
+
 
 
 int main() {
@@ -123,8 +147,11 @@ int main() {
     insertAtPos(tail, 12, 345);
     deleteNode(tail, 12);
 
+    cout << isdetected(tail) << endl;
+
+
     
-    print(tail);
+    //print(tail);
 
 
 

@@ -1,4 +1,5 @@
 #include<iostream>
+#include<map>
 
 using  namespace std;
 
@@ -204,7 +205,98 @@ void insertAtPos(int pos, int data , Node* &head, Node* &tail) {
           reverseLLRecursive(head, ford, curr);
           curr->next= prev;
 
-  };
+  }
+
+
+  Node* ReverseinKNodes(Node* head, int k) {
+         if(head == NULL) return NULL;
+
+
+         Node* curr =  head;
+         Node* Next = NULL;
+         Node* prev = NULL;
+
+
+         int c=  0;
+         while(curr !=NULL && c <k) {
+               Next = curr->next;
+               curr->next = prev;
+               prev= curr;
+               curr = Next;
+               c++;
+               
+
+         }
+
+         if(Next != NULL) {
+               head->next = ReverseinKNodes(Next, k);
+
+         }
+
+         return prev;
+
+
+
+  }
+
+  bool isdetected(Node* &head)  {
+        
+        if(head == NULL) return false;
+
+         map<Node* , bool> visited;
+
+
+         Node* temp = head;
+         while(temp !=NULL) {
+              if(visited[temp] == true) {
+                     return 1;
+
+              }
+
+              visited[temp] == true;
+              temp = temp->next;
+
+         }
+
+         return 0;
+
+  }
+
+  Node* floyed(Node* &head) {
+         if(head == NULL) return NULL;
+
+
+
+         Node* slow=  head;
+         Node* fast =  head;
+
+
+         while(slow!= NULL && fast !=NULL) {
+               fast = fast->next;
+               if(fast!=NULL) {
+                     fast = fast->next;
+               }
+
+               slow = slow->next;
+
+
+               if(slow == fast) {
+                    return slow;
+
+
+
+               }
+
+
+         }
+
+         return NULL;
+
+
+
+
+
+  }
 
   
 
@@ -224,7 +316,7 @@ int main() {
 
    insertAtPos(3,33,head, tail);
 
-   printLL(head);
+
 
 //    deleteNode(3, head, tail);
 //    deleteNode(1,head, tail);
@@ -238,9 +330,21 @@ int main() {
 
 //    reverseLLRecursive(head, curr, prev);
 
-int ans = middle(head);
+// int ans = middle(head);
 
-cout << ans << endl;
+// cout << ans << endl;
+
+//   Node* ans1 = ReverseinKNodes(head, 2);
+//   cout << isdetected(head) << endl;
+
+//   printLL(ans1);
+
+
+  Node* ans=  floyed(head);
+  cout << ans << endl;
+  
+
+
 
    
    //printLL(head);
@@ -255,7 +359,7 @@ cout << ans << endl;
 
 
 
-   cout << head->data << tail->data << endl;
+   
 
 
 
