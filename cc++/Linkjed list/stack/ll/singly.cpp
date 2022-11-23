@@ -298,6 +298,25 @@ void insertAtPos(int pos, int data , Node* &head, Node* &tail) {
 
   }
 
+  Node *getStarting(Node* &head) {
+       
+       if(head == NULL) return NULL;
+
+
+       Node* intersection = floyed(head);
+
+       Node*slow = head;
+       while(slow != intersection) {
+              slow= slow->next;
+              intersection = intersection->next;
+
+       }
+
+
+       return slow;
+       
+  }
+
   
 
 
@@ -342,7 +361,7 @@ int main() {
 
   Node* ans=  floyed(head);
   cout << ans << endl;
-  
+
 
 
 
