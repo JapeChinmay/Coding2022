@@ -62,6 +62,17 @@ void insertAtBottm(stack<char>&cj, char ch) {
 
 }
 
+void reverseStack(stack<char>&cj) {
+      if(cj.empty()) {
+          return;
+
+      }
+
+
+}
+
+
+
 
 
 
