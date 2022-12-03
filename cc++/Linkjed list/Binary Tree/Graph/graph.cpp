@@ -1,4 +1,5 @@
 #include<iostream>
+#include<queue>
 
 using namespace std;
 
@@ -20,6 +21,35 @@ void print(int ** edges , int n, int sv, bool* seen) {
 
             }
        }
+
+
+
+}
+
+
+
+     
+       
+         
+void DFS(int ** edges, int n) {
+      
+         bool * visited = new bool[n];
+         for(int i=0;i<n ;i++){
+            
+              visited[i] = false;
+
+         }
+
+         for(int i=  0 ;i<n;i++) {
+
+          if(!visited[i] ) {
+
+         print(edges,  n, i , visited);
+
+          }
+
+         }
+         delete [] visited;
 
 
 
@@ -72,10 +102,13 @@ int main() {
 
       }
 
-      print( edges, n, 0, seen );
+     DFS(edges, n);
 
 
 
 
+
+  
+return 0;
 
 }
