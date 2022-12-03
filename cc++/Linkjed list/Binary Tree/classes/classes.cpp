@@ -31,9 +31,14 @@ class vechile {
                   
             }
 
+            void modify() {
+                   cout << "Modify called" << endl;
+
+            }
+
 };
 
-class car: public vechile{
+class car:  virtual public vechile{
       public:
         int newC;
 
@@ -42,22 +47,38 @@ class car: public vechile{
             cout << "Defaul c called ex" << endl;
 
         }
+        void modify() {
+                   cout << "Modify called from car" << endl;
+                   
+            }
 
         ~car() {
               cout << "Destrictor called for car" << endl;
 
         }
+
+
        
 
 
 };
 
-class Truck : public vechile {
+class Truck : virtual  public vechile {
        public:
          Truck() {
                cout <<"Truck is called" << endl;
 
          }
+
+        //  void modify() {
+        //            cout << "Modify called from truck" << endl;
+                   
+        //     }
+
+            ~Truck () {
+                   cout << "truck destructor called "  << endl;
+
+            }
 
 
 };
@@ -137,6 +158,8 @@ class TA : public Teacher, public Student {
 
 
 
+
+
 int main() {
 
    // Honda h1;
@@ -158,6 +181,14 @@ int main() {
     // a.print();
 
     Bus b1;
+
+    cout << "///////////////////////////////////////////////////////////////////////////" << endl;
+
+    // b1.car :: modify();
+    // // calling modify of car .
+
+    // b1.Truck :: modify();
+
 
 
 
