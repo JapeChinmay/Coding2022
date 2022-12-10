@@ -16,12 +16,14 @@ class vechile {
 
         public:
 
-            vechile() {
+            // vechile() {
                   
-                  cout << "Defaul v called" << endl;
-            }
+            //       cout << "Defaul v called" << endl;
+            // }
 
             vechile(int z) {
+                cout << "constructor called " << z << endl;
+
                    num = z;
 
             }
@@ -42,7 +44,7 @@ class car:  virtual public vechile{
       public:
         int newC;
 
-        car()  {
+        car()  : vechile(2) {
 
             cout << "Defaul c called ex" << endl;
 
@@ -65,7 +67,7 @@ class car:  virtual public vechile{
 
 class Truck : virtual  public vechile {
        public:
-         Truck() {
+         Truck() : vechile(34) {
                cout <<"Truck is called" << endl;
 
          }
@@ -86,7 +88,7 @@ class Truck : virtual  public vechile {
 
 class Bus : public car, public Truck {
       public:
-         Bus () {
+         Bus ()  : vechile(99){
                cout <<" Bus is called" << endl;
 
          }
@@ -101,7 +103,7 @@ class Bus : public car, public Truck {
 class Honda : public car {
         
         public:
-          Honda() {
+          Honda() : vechile(34) {
               
               cout << " honda city c " << endl;
 
