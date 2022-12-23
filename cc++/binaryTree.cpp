@@ -129,12 +129,48 @@ BinaryTree<int>* takeInputLevelWise() {
 
 }
 
+int maximum(BinaryTree<int>* root) {
+
+      if(root == NULL) return INT_MIN;
+
+      return max(root->data, max(maximum(root->left), maximum(root->right)));
+
+      
+}
+
+int minimum(BinaryTree<int>* root) {
+     
+      if(root == NULL) return INT_MAX;
+
+      return min(root->data , min(minimum(root->left), minimum(root->right)));
+      
+}
+
+bool isBST(BinaryTree<int>* root) {
+      if(root == NULL) return true;
+
+
+      int leftMAx  = maximum(root->left);
+     int rightMin = minimum(root->right);
+
+     bool ans = ((root->data > leftMAx) && (root->data < rightMin) && isBST(root->left) && isBST(root->left));
+     return ans;
+
+
+
+
+       
+        
+}
+
 int main() {
 
 
 
     BinaryTree<int>* root  = takeInputLevelWise();
     printTree(root);
+    cout << isBST(root) << endl;
+    
     
 
 
