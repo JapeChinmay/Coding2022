@@ -163,6 +163,52 @@ bool isBST(BinaryTree<int>* root) {
         
 }
 
+class isBSTReturn {
+      public:
+        bool isBSt;
+        int minimum;
+        int maximum;
+
+};
+
+isBSTReturn isBST2(BinaryTree<int>* root) {
+        if(root==NULL) {
+              isBSTReturn op;
+              op.isBSt = true;
+              op.minimum = INT_MAX;
+              op.maximum = INT_MIN;
+              return op;
+
+
+        }
+
+        isBSTReturn leftOp = isBST2(root->left);
+        isBSTReturn rightOp=  isBST2(root->right);
+        int minimum = min(root->data, min(leftOp.minimum, rightOp.minimum));
+        int maximum = max(root->data, max(leftOp.maximum, rightOp.maximum));
+
+        bool ans = (root->data > leftOp.maximum) && (root->data <= rightOp.minimum)  && (leftOp.isBSt) && (rightOp.isBSt);
+
+        isBSTReturn output1;
+        output1.isBSt = ans;
+        output1.maximum = maximum;
+        output1.minimum = minimum;
+        return output1;
+
+};
+
+bool isBST3(BinaryTree<int>* root, int min= INT_MIN, int max =INT_MAX)  {
+        if(root == NULL) return true;
+        if(root->data < min || root->data > max) return false;
+
+        bool isLeftOK = isBST3(root->left , min , root->data -1);
+        bool isRightOk  = isBST3(root->right, root->data , max);
+        return isLeftOK && isRightOk;
+
+
+}
+
+
 int main() {
 
 
@@ -170,7 +216,7 @@ int main() {
     BinaryTree<int>* root  = takeInputLevelWise();
     printTree(root);
     cout << isBST(root) << endl;
-    
+
     
 
 
