@@ -36,95 +36,102 @@ class PriorityQueue {
 
        }
 
-       int getMin() {
-          
-             if(isEmpty()) {
+       void insert(int element) {
 
-                return 0;
+             pq.push_back(element);
 
-                  
+             // finding child and parent index
+             // we can now compare if child is smaller than parent to preserve heap order property
+             
+
+             int childIndex = pq.size() -1;
+
+             // running while loop until we react root or we have found the right match for the number
+
+            while(childIndex > 0 ) {
+             int parentIndex = (childIndex  - 1 )/2;
+
+             if(pq[childIndex] < pq[parentIndex]) {
+
+               //swapping child to parent if  it i smaller
+
+               int temp = pq[childIndex];
+               pq[childIndex] = pq[parentIndex];
+               pq[parentIndex] = temp;
+
+
+                    
+             }else {
+                break;
+
              }
 
-             return pq[0];
-       }
-
-       void insert(int element) {
-           pq.push_back(element);
-           int childIndex = pq.size()-1;
 
 
-        while(childIndex > 0) {
-           int parentIndex = (childIndex-1) /2;
-           if(pq[childIndex] < pq[parentIndex]) {
-                int temp  = pq[childIndex];
-                pq[childIndex] =  pq[parentIndex];
-                pq[parentIndex] = temp;
+             // calculating new parentIdnex;
+             childIndex = parentIndex;
 
-           }else {
-             break;
-
-           }
-
-           // the new child is previous parent so new parent must be calculated.
-
-           childIndex = parentIndex;
-        }
-
-           
+            }
+             
 
        }
 
        int removeMin() {
+         if(isEmpty()) {
+               return 0;
 
-        if(isEmpty()) {
-             return 0;
-
-        }
+         }
           
              int ans = pq[0];
-             pq[0] = pq[pq.size()-1];
+             pq[0]=  pq[pq.size()-1];
              pq.pop_back();
 
-       
-       // down-heapify
+             // down-heapify 
 
-       int parentIndex = 0;
-       int leftChildIndex = 2 * (parentIndex) + 1;
-       int rightChildIndex = 2 * (parentIndex) + 2;
+             int parentIndex = 0;
+             int leftChildIndex = 2 * parentIndex  +1;
+             int rightChildIndex = 2 * parentIndex +2;
 
-       while(leftChildIndex < pq.size()) {
-       int minIndex = parentIndex;
-       if(pq[minIndex] > pq[leftChildIndex]) {
-           minIndex = leftChildIndex;
+
+             while(leftChildIndex < pq.size()) {
+             int minIndex = parentIndex;
+             if(pq[minIndex] > pq[leftChildIndex]) {
+                 minIndex = leftChildIndex;
+
+             }
+
+             if(rightChildIndex < pq.size()  &&  pq[minIndex] > pq[rightChildIndex]) {
+                 minIndex = rightChildIndex;
+
+             }
+             if( minIndex == parentIndex) {
+                  break;
+
+             }
+
+             int temp  = pq[minIndex];
+             pq[minIndex] =  pq[parentIndex];
+             pq[parentIndex] = temp;
+
+             parentIndex = minIndex;
+             leftChildIndex=  2* parentIndex + 1;
+             rightChildIndex = 2* parentIndex +2;
+
+
+             }
+
+
+
+
+             return ans;
+
+
        }
 
-       if(rightChildIndex < pq.size() &&   pq[minIndex] > pq[rightChildIndex]) {
-          minIndex = rightChildIndex;
-
-       }
-
-       if(minIndex == parentIndex) {
-           break;
-
-       }
-
-       int temp  = pq[minIndex];
-       pq[minIndex] = pq[parentIndex];
-       pq[parentIndex] = temp;
-
-       parentIndex = minIndex;
-       leftChildIndex  =  2 * parentIndex + 1;
-       rightChildIndex = 2 * parentIndex + 2;
 
 
+      
 
-       }
-
-       
-
-       return ans;
-
-       };
 
 };
 
@@ -141,11 +148,13 @@ class PriorityQueue {
 int main () {
 
     PriorityQueue p;
-    p.insert(1212);
-    p.insert(1242);
-    p.insert(1212);
-    p.insert(1212);
-    p.insert(1212);
+   p.insert(12);
+   p.insert(34);
+   p.insert(454);
+   p.removeMin();
+   
+    p.removeMin();
+
 
     cout << p.getSize() << endl;
 
