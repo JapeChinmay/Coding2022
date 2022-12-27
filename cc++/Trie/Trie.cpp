@@ -80,6 +80,8 @@ class Trie {
 
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
         bool searchInTrie(TrieNode* root , string word) {
               
                // base case
@@ -87,7 +89,7 @@ class Trie {
                if(word.size() == 0) {
                      
                     return root->isTerminal;
-                    
+
 
                }
 
@@ -117,6 +119,45 @@ class Trie {
              
               return searchInTrie(root , word);
 
+        }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        void remove(TrieNode* root , string word) { 
+
+             if(word.size()  == 0) {
+                   if(root->isTerminal) {
+                         
+                         root->isTerminal=false;
+
+                    }
+
+                    return;
+
+                   
+                   
+             }
+
+             int index = word[0] - 'a';
+             if(root->children[index] != NULL) {
+                   
+                     return remove(root->children[index] , word.substr(1));
+
+             }else {
+                   
+                   return;
+                   
+             }
+
+
+
+
+        }
+
+        void remove(string word) {
+             
+              if(word.size() == 0) return;
+              else return remove(root, word);
         }
 };
 
